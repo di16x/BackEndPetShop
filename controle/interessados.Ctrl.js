@@ -1,7 +1,7 @@
-import Interresado from "../modelo/interresados.js";
+import Interessado from "../modelo/interessados.js";
 
 
-export default class InterresadosCtrl{
+export default class InteressadosCtrl{
     
     gravar (requisicao,resposta){
         if(requisicao.method == "POST" && requisicao.is("application/json")){
@@ -14,16 +14,16 @@ export default class InterresadosCtrl{
             
 
             if (nome && sigla && num_registro){
-                const interresado = new Interresado(id,cpf, nome, telefone, email);
-                interresado.incluir() .then (() => {
+                const interessado = new Interessado(id,cpf, nome, telefone, email);
+                interessado.incluir() .then (() => {
                     resposta.status(201).json({
                         "status": true,
-                        "mensagem": "Interresado cadastrado com sucesso!"
+                        "mensagem": "Interessado cadastrado com sucesso!"
                     })
                 }).catch((erro)=>{
                     resposta.status(500).json({
                         "status":false,
-                        "mensagem": "Erro ao incluir o interresado:" + erro.message
+                        "mensagem": "Erro ao incluir o interessado:" + erro.message
                     })
                 });
             }
@@ -54,17 +54,17 @@ export default class InterresadosCtrl{
             const email = dados.email;
             
             if (id && cpf && nome && telefone && email){
-                const interresado = new Interresado(id, cpf, nome, telefone, email );
-                interresado.alterar().then(()=> {
+                const interessado = new Interessado(id, cpf, nome, telefone, email );
+                interessado.alterar().then(()=> {
                     resposta.status(200).json({
                         "status" : true,
-                        "mensagem":"Interresado alterado com sucesso!"
+                        "mensagem":"Interessado alterado com sucesso!"
 
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
                     "status": false,
-                    "mensagem": "Erro ao alterar o interresado " + erro.message
+                    "mensagem": "Erro ao alterar o interessado " + erro.message
                 })
             })
         }
@@ -90,16 +90,16 @@ export default class InterresadosCtrl{
                 const id = dados.id; 
         
                 if (id) {
-                    const interresado = new Interresado(id); 
-                    interresado.excluir().then(() => {
+                    const interessado = new Interessado(id); 
+                    interessado.excluir().then(() => {
                         resposta.status(200).json({
                             "status": true,
-                            "mensagem": "Interresado excluído com sucesso!"
+                            "mensagem": "Interessado excluído com sucesso!"
                         });
                     }).catch((erro) => {
                         resposta.status(500).json({
                             "status": false,
-                            "mensagem": "Erro ao excluir o interresado: " + erro.message
+                            "mensagem": "Erro ao excluir o interessado: " + erro.message
                         })
                     })
                 } 
@@ -126,16 +126,16 @@ export default class InterresadosCtrl{
 
         }
         if(requisicao.method == "GET"){
-            const interresado = new Interresado();
-            interresado.consultar(termoBusca).then((interresados) =>{
+            const interessado = new Interessado();
+            interessado.consultar(termoBusca).then((interessados) =>{
                 return resposta.status(200).json({
                     "status":true,
-                    "listaInterresados": interresados
+                    "listaInteressados": interessados
                 });
             }).catch((erro) =>{
                 return resposta.status(500).json({
                     "status:":false,
-                    "mensagem": "Erro ao consultar a lista de interresados cadastrados " + erro.message
+                    "mensagem": "Erro ao consultar a lista de interessados cadastrados " + erro.message
                 })
             })
         } else {

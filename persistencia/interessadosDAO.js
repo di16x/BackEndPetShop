@@ -1,6 +1,6 @@
 import conectar from "./conexao.js";
-import Interresado from "../modelo/interresados.js";
-export default class interresadosDAO {
+import Interessado from "../modelo/interessados.js";
+export default class interessadosDAO {
 
     constructor(){
         this.init();
@@ -9,7 +9,7 @@ export default class interresadosDAO {
     async init (){
         try {
                 const conexao = await conectar();
-                const sql = `CREATE TABLE IF NOT EXISTS interresado(
+                const sql = `CREATE TABLE IF NOT EXISTS interessado(
                     cpf INT NOT NULL,
                     nome VARCHAR (50) NOT NULL,
                     telefone VARCHAR (14) NOT NULL 
@@ -24,37 +24,37 @@ export default class interresadosDAO {
     }
     }
 
-    async gravar (interresado){
-        if (interresado instanceof Interresado){
+    async gravar (interessado){
+        if (interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `INSERT INTO interresado (cpf,nome,telefone,email,id)VALUES (?,?,?,?,?);`;
+            const sql = `INSERT INTO interessado (cpf,nome,telefone,email,id)VALUES (?,?,?,?,?);`;
             const parametros = [
-                interresado.cpf,
-                interresado.nome,
-                interresado.telefone,
-                interresado.email,
-                interresado.id
+                interessado.cpf,
+                interessado.nome,
+                interessado.telefone,
+                interessado.email,
+                interessado.id
             ];
             await conexao.execute(sql,parametros);
             await global.poolConexoes.releaseConnection(conexao);
         }
     }
 
-    async alterar (interresado){
-        if (interresado instanceof Interresado){
+    async alterar (interessado){
+        if (interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `UPDATE interresado SET
+            const sql = `UPDATE interessado SET
                         cpf=?,
                         nome =?,
                         telefone =?,
                         email =?,
                         WHERE id =?;`;
             const parametros = [
-                interresado.cpf,
-                interresado.nome,
-                interresado.telefone,
-                interresado.email,
-                interresado.id
+                interessado.cpf,
+                interessado.nome,
+                interessado.telefone,
+                interessado.email,
+                interessado.id
             ];
             await conexao.execute(sql,parametros);
             await global.poolConexoes.releaseConnection(conexao);
@@ -63,11 +63,11 @@ export default class interresadosDAO {
         }
     }
 
-    async excluir (interresado){
-        if(interresado instanceof Interresado){
+    async excluir (interessado){
+        if(interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `DELETE FROM interresado WHERE id = ?;`;
-            const parametros = [interresado.id];
+            const sql = `DELETE FROM interessado WHERE id = ?;`;
+            const parametros = [interessado.id];
             await conexao.execute(sql, parametros);
             await global.poolConexoes.releaseConnection(conexao);
         }
@@ -77,27 +77,27 @@ export default class interresadosDAO {
         let sql = "";
         let parametros = [];
         if (termoBusca){
-            sql = `SELECT * FROM interresado WHERE id = ? order by nome;`;
+            sql = `SELECT * FROM interessado WHERE id = ? order by nome;`;
             parametros.push(termoBusca);
         }
         else { 
-            sql = `SELECT * FROM interresado order by nome;`;
+            sql = `SELECT * FROM interessado order by nome;`;
         }
         const conexao = await conectar();
         const [registros] = await conexao.execute(sql,parametros);
-        let listaInterresados = [];
+        let listaInteressados = [];
         for (const registro of registros){
-            const interresado= new Interresado(
-                interresado.cpf,
-                interresado.nome,
-                interresado.telefone,
-                interresado.email,
-                interresado.id
+            const interessado= new Interessado(
+                interessado.cpf,
+                interessado.nome,
+                interessado.telefone,
+                interessado.email,
+                interessado.id
             );
-            listaInterresados.push(interresado);
+            listaInteressados.push(interessado);
         }
         await global.poolConexoes.releaseConnection(conexao);
-        return listaInterresados;
+        return listaInteressados;
 
     }
 

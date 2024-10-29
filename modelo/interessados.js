@@ -1,6 +1,6 @@
-import interresadoDAO from '../persistencia/interresadosDAO.js';
+import interessadoDAO from '../persistencia/interessadosDAO.js';
 
-export default class Interresado{
+export default class Interessado{
     #id
     #cpf
     #nome
@@ -83,22 +83,22 @@ Email: ${this.#email} \n`
     }
 
     async incluir (){
-        const inteDAO = new interresadoDAO();
+        const inteDAO = new interessadoDAO();
         await inteDAO.gravar(this);
     }
 
     async alterar (){
-        const inteDAO = new interresadoDAO();
+        const inteDAO = new interessadoDAO();
         await inteDAO.alterar(this);
     }
     
     async excluir(){
-        const inteDAO = new interresadoDAO();
+        const inteDAO = new interessadoDAO();
         await inteDAO.excluir(this);
     }
 
     async consultar(termoBusca){
-        const inteDAO = new interresadoDAO();
+        const inteDAO = new interessadoDAO();
         return await inteDAO.consultar(termoBusca);
     }
 }

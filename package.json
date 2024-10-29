@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Back end da aplicação",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/di16x/BackEndPetShop/issues"
   },
-  "homepage": "https://github.com/di16x/BackEndPetShop#readme"
+  "homepage": "https://github.com/di16x/BackEndPetShop#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }

@@ -3,13 +3,13 @@ import filhoteDAO from '../persistencia/filhotesDAO.js';
 export default class Filhote{
     #id
     #especie
-    #raça
+    #raca
 
 
-    constructor(id,especie,raça){
+    constructor(id,especie,raca){
         this.#id = id;
         this.#especie = especie;
-        this.#raça = raça;}
+        this.#raca = raca;}
 
 
     get id (){
@@ -31,12 +31,12 @@ export default class Filhote{
 
 
     
-    get raça (){
-        return this.raça;
+    get raca (){
+        return this.raca;
     }
 
-    set raça (novoraça){
-       this.#raça = novoraça; 
+    set raca (novoraca){
+       this.#raca = novoraca; 
     }
 
     
@@ -46,14 +46,14 @@ export default class Filhote{
     toString(){
         return `Id: ${this.#id} 
 Espécie: ${this.#especie} 
-Raça do Animal: ${this.#raça} \n`
+Raça do Animal: ${this.#raca} \n`
     }
 
     toJSON(){
         return {
             id:this.#id,
             especie:this.#especie,
-            raça:this.#raça,
+            raca:this.#raca,
            
         }
     }

@@ -8,11 +8,11 @@ export default class FilhoteCtrl{
             const dados = requisicao.body;
             const id = dados.id;
             const especie = dados.especie;
-            const raça = dados.raça;
+            const raca = dados.raca;
             
 
-            if (id && especie && raça){
-                const filhote = new Filhote(id,especie,raça);
+            if (id && especie && raca){
+                const filhote = new Filhote(id,especie,raca);
                 filhote.incluir() .then (() => {
                     resposta.status(201).json({
                         "status": true,
@@ -47,10 +47,10 @@ export default class FilhoteCtrl{
             const dados = requisicao.body;
             const id = dados.id;
             const especie = dados.especie;
-            const raça = dados.raça;
+            const raca = dados.raca;
             
-            if (id && especie && raça){
-                const filhote = new Filhote(id,especie,raça);
+            if (id && especie && raca){
+                const filhote = new Filhote(id,especie,raca);
                 filhote.alterar().then(()=> {
                     resposta.status(200).json({
                         "status" : true,

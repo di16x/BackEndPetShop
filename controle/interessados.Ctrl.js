@@ -13,7 +13,7 @@ export default class InteressadosCtrl{
             const email = dados.email;
             
 
-            if (nome && sigla && num_registro){
+            if (id && cpf && nome && telefone && email){
                 const interessado = new Interessado(id,cpf, nome, telefone, email);
                 interessado.incluir() .then (() => {
                     resposta.status(201).json({

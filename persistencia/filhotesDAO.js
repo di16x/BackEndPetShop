@@ -10,10 +10,11 @@ export default class filhotesDAO {
         try {
                 const conexao = await conectar();
                 const sql = `CREATE TABLE IF NOT EXISTS filhote(
-                    raca VARCHAR (50) NOT NULL,
+                    id VARCHAR (14) NOT NULL PRIMARY KEY,
                     especie VARCHAR (10) NOT NULL,
-                    id VARCHAR (14) NOT NULL PRIMARY KEY);
-                    `;
+                    raca VARCHAR (50) NOT NULL
+                  );`;
+     
         await conexao.execute(sql);
         await global.poolConexoes.releaseConnection(conexao);
         console.log("Banco de dados iniciado!")
@@ -69,20 +70,20 @@ export default class filhotesDAO {
         let sql = "";
         let parametros = [];
         if (termoBusca){
-            sql = `SELECT * FROM filhote WHERE id = ? order by nome;`;
+            sql = `SELECT * FROM filhote WHERE id = ? order by id;`;
             parametros.push(termoBusca);
         }
         else { 
-            sql = `SELECT * FROM filhote order by nome;`;
+            sql = `SELECT * FROM filhote order by id;`;
         }
         const conexao = await conectar();
         const [registros] = await conexao.execute(sql,parametros);
         let listaFilhotes = [];
         for (const registro of registros){
             const filhote = new Filhote(
-                registro.especie,
-                registro.raca,
-                registro.id
+                filhote.especie,
+                filhote.raca,
+                filhote.id
             );
             listaFilhotes.push(filhote);
         }

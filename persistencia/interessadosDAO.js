@@ -9,10 +9,10 @@ export default class interessadosDAO {
     async init (){
         try {
                 const conexao = await conectar();
-                const sql = `CREATE TABLE IF NOT EXISTS interessado(
+                const sql = `CREATE TABLE IF NOT EXISTS interessados(
                     cpf INT NOT NULL,
                     nome VARCHAR (50) NOT NULL,
-                    telefone VARCHAR (14) NOT NULL 
+                    telefone VARCHAR (14) NOT NULL, 
                     email VARCHAR (14)
                     id (14) NOT NULL PRIMARY KEY);
                     `;
@@ -27,13 +27,14 @@ export default class interessadosDAO {
     async gravar (interessado){
         if (interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `INSERT INTO interessado (cpf,nome,telefone,email,id)VALUES (?,?,?,?,?);`;
+            const sql = `INSERT INTO interessados (id,cpf,nome,telefone,email)VALUES (?,?,?,?,?);`;
             const parametros = [
+                interessado.id,
                 interessado.cpf,
                 interessado.nome,
                 interessado.telefone,
                 interessado.email,
-                interessado.id
+                
             ];
             await conexao.execute(sql,parametros);
             await global.poolConexoes.releaseConnection(conexao);
@@ -43,7 +44,7 @@ export default class interessadosDAO {
     async alterar (interessado){
         if (interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `UPDATE interessado SET
+            const sql = `UPDATE interessados SET
                         cpf=?,
                         nome =?,
                         telefone =?,
@@ -66,7 +67,7 @@ export default class interessadosDAO {
     async excluir (interessado){
         if(interessado instanceof Interessado){
             const conexao = await conectar();
-            const sql = `DELETE FROM interessado WHERE id = ?;`;
+            const sql = `DELETE FROM interessados WHERE id = ?;`;
             const parametros = [interessado.id];
             await conexao.execute(sql, parametros);
             await global.poolConexoes.releaseConnection(conexao);
@@ -77,11 +78,11 @@ export default class interessadosDAO {
         let sql = "";
         let parametros = [];
         if (termoBusca){
-            sql = `SELECT * FROM interessado WHERE id = ? order by nome;`;
+            sql = `SELECT * FROM interessados WHERE id = ? order by nome;`;
             parametros.push(termoBusca);
         }
         else { 
-            sql = `SELECT * FROM interessado order by nome;`;
+            sql = `SELECT * FROM interessados order by nome;`;
         }
         const conexao = await conectar();
         const [registros] = await conexao.execute(sql,parametros);

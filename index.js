@@ -1,6 +1,6 @@
 import express from "express";
 import rotaFilhote from "./rotas/rotafilhotes.js";
-import rotaInterresado from "./rotas/rotainterresados.js";
+import rotaInteressado from "./rotas/rotainteressados.js";
 import cors from "cors"
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/filhote', rotaFilhote);
-app.use('/interresados',rotaInterresado);
+app.use('/interessados',rotaInteressado);
 
 app.listen(porta,host, () => {
     console.log(`Servidor iniciado em http://${porta}`);
